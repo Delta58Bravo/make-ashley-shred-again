@@ -1461,7 +1461,8 @@ body::before {
     <!-- Oxy Log -->
     <div class="card" style="border-color:var(--red);box-shadow:0 0 16px var(--red);">
       <div class="card-title" style="color:var(--red);border-color:var(--red);">🔴 Oxy / PRN Pain Log</div>
-      <p style="font-size:11px;color:#aaa;margin-bottom:12px;">Log oxycodone doses as-needed. Always log with pain level.</p>
+      <p style="font-size:11px;color:#aaa;margin-bottom:12px;">Log oxycodone doses as-needed. Every 6 hours max. Always log with pain level.</p>
+      <div id="oxy-status" style="margin-bottom:10px;font-family:'Comic Sans MS',cursive;font-size:12px;"></div>
       <button class="oxy-log-btn" onclick="toggleOxyForm()">+ Log Dose</button>
       <div class="oxy-form" id="oxy-form">
         <label>Pain Level: <span id="oxy-pain-display" style="color:var(--red);">5</span>/10</label>
@@ -2006,6 +2007,8 @@ function renderMeds(day, today) {
           <div class="med-dose">${med.dose}</div>
           ${med.slot ? `<div class="med-dose" style="color:var(--gold);">Slot: ${med.slot}</div>` : ''}
           ${taken ? `<div class="med-time">✓ Taken at ${timeStr}</div>` : ''}
+          ${med.key === 'meloxicam' && taken ? `<div class="med-dose" style="color:var(--gold);margin-top:4px;">📅 Next dose: Tomorrow morning with food</div>` : ''}
+          ${med.key === 'meloxicam' && !taken ? `<div class="med-dose" style="color:#888;margin-top:4px;">⏰ Take once daily with food</div>` : ''}
         </div>
       </div>
     `;
@@ -2081,17 +2084,72 @@ function submitOxyDose() {
   });
 }
 
+let oxyCountdownInterval = null;
+
+function renderOxyStatus(lastDoseTime) {
+  const statusEl = document.getElementById('oxy-status');
+  if (!statusEl) return;
+
+  if (!lastDoseTime) {
+    statusEl.innerHTML = '<span style="color:#555;">No doses logged yet — available now if needed.</span>';
+    return;
+  }
+
+  const last = new Date(lastDoseTime);
+  const nextAvailable = new Date(last.getTime() + 6 * 60 * 60 * 1000);
+  const lastStr = last.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' });
+
+  function update() {
+    const now = new Date();
+    const diff = nextAvailable - now;
+    if (diff <= 0) {
+      statusEl.innerHTML = `
+        <div style="color:var(--green);text-shadow:0 0 8px var(--green);">✅ Next dose available now</div>
+        <div style="color:#666;font-size:10px;margin-top:2px;">Last dose: ${lastStr}</div>`;
+    } else {
+      const hrs = Math.floor(diff / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const timeLeft = hrs > 0 ? `${hrs}h ${mins}m` : `${mins}m`;
+      statusEl.innerHTML = `
+        <div style="color:var(--red);text-shadow:0 0 8px var(--red);">⏳ Next dose in: <strong>${timeLeft}</strong></div>
+        <div style="color:#666;font-size:10px;margin-top:2px;">Last dose: ${lastStr} · Available at ${nextAvailable.toLocaleTimeString('en-US', {timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'})}</div>`;
+    }
+  }
+
+  if (oxyCountdownInterval) clearInterval(oxyCountdownInterval);
+  update();
+  oxyCountdownInterval = setInterval(update, 30000);
+}
+
 function loadOxyEntries(today) {
-  db.ref('/masa/meds/' + today + '/oxy').once('value').then(snap => {
-    const data = snap.val();
+  // Also check yesterday for last dose (in case they took one late last night)
+  const yesterday = dateStringForDay(getDayOfRecovery() - 1);
+  const p1 = db.ref('/masa/meds/' + today + '/oxy').once('value');
+  const p2 = getDayOfRecovery() > 0
+    ? db.ref('/masa/meds/' + yesterday + '/oxy').once('value')
+    : Promise.resolve(null);
+
+  Promise.all([p1, p2]).then(([todaySnap, yestSnap]) => {
+    const todayData = todaySnap.val();
+    const yestData = yestSnap ? yestSnap.val() : null;
+
+    // Find most recent dose across today + yesterday
+    const allEntries = [];
+    if (todayData) allEntries.push(...Object.values(todayData));
+    if (yestData) allEntries.push(...Object.values(yestData));
+    allEntries.sort((a, b) => new Date(b.time) - new Date(a.time));
+    const lastDoseTime = allEntries.length > 0 ? allEntries[0].time : null;
+    renderOxyStatus(lastDoseTime);
+
+    // Render today's dose list
     const container = document.getElementById('oxy-entries');
-    if (!data) {
-      container.innerHTML = '<div style="color:#555;font-size:11px;">No doses logged today.</div>';
+    if (!todayData) {
+      container.innerHTML = '<div style="color:#555;font-size:11px;margin-top:8px;">No doses logged today.</div>';
       return;
     }
-    const entries = Object.values(data).sort((a,b) => new Date(a.time) - new Date(b.time));
-    container.innerHTML = '<div style="font-size:11px;color:#aaa;margin-bottom:6px;">Today\'s doses:</div>' +
-      entries.map(e => {
+    const todayEntries = Object.values(todayData).sort((a, b) => new Date(a.time) - new Date(b.time));
+    container.innerHTML = '<div style="font-size:11px;color:#aaa;margin-bottom:6px;margin-top:8px;">Today\'s doses:</div>' +
+      todayEntries.map(e => {
         const t = new Date(e.time).toLocaleTimeString('en-US', {
           timeZone: 'America/Los_Angeles',
           hour: 'numeric', minute: '2-digit'
