@@ -2276,8 +2276,8 @@ function loadPainChart() {
 const APPOINTMENTS = [
   {
     id: 'countdown-pt',
-    // March 23, 2026 3:30 PM PST = UTC+8 during standard time → 23:30 UTC
-    utc: new Date('2026-03-23T23:30:00Z')
+    // March 23, 2026 3:30 PM PDT (DST active, UTC-7) → 22:30 UTC
+    utc: new Date('2026-03-23T22:30:00Z')
   },
   {
     id: 'countdown-postop',
