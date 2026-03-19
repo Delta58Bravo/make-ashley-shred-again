@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff69b4">
+<title>Make Ashley Shred Again 🤘</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GLOBAL RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink: #ff69b4;
+  --cyan: #00ffff;
+  --green: #39ff14;
+  --purple: #bf5fff;
+  --red: #ff1744;
+  --gold: #ffd700;
+  --bg: #000000;
+  --card-bg: #0a0010;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  font-size: 14px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ============================================================
+   STARFIELD — CSS only, 80 stars via box-shadow
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow:
+    12px   45px #fff, 38px  120px #fff, 75px   18px #fff,
+   102px  200px #fff,145px   67px #fff,180px  310px #fff,
+   220px   92px #fff,258px  405px #fff,290px   33px #fff,
+   315px  270px #fff,345px  155px #fff,388px   80px #fff,
+   420px  480px #fff,455px   22px #fff,490px  360px #fff,
+   525px  130px #fff,558px  500px #fff,592px   58px #fff,
+   625px  290px #fff,660px  175px #fff,695px  420px #fff,
+   728px   44px #fff,762px  330px #fff,795px  110px #fff,
+   830px  460px #fff,865px   15px #fff,898px  250px #fff,
+   932px  390px #fff,965px   72px #fff,998px  540px #fff,
+    22px  560px #fff, 58px  430px #fff, 93px  690px #fff,
+   128px  610px #fff,163px  750px #fff,198px  580px #fff,
+   233px  800px #fff,268px  640px #fff,303px  710px #fff,
+   338px  520px #fff,373px  860px #fff,408px  670px #fff,
+   443px  730px #fff,478px  590px #fff,513px  820px #fff,
+   548px  660px #fff,583px  900px #fff,618px  740px #fff,
+   653px  610px #fff,688px  880px #fff,723px  550px #fff,
+   758px  790px #fff,793px  630px #fff,828px  850px #fff,
+   863px  700px #fff,898px  960px #fff,933px  575px #fff,
+   968px  840px #fff,  5px  950px #fff, 42px  870px #fff,
+    80px 1020px #fff,115px  920px #fff,150px 1050px #fff,
+   185px  990px #fff,220px 1080px #fff,255px  940px #fff,
+   290px 1010px #fff,325px  970px #fff,360px 1060px #fff,
+   395px 1000px #fff,430px 1090px #fff,465px  930px #fff,
+   500px 1070px #fff,535px  910px #fff,570px 1100px #fff,
+   605px  980px #fff,640px 1030px #fff,675px  895px #fff,
+   710px 1110px #fff,745px  955px #fff;
+  border-radius: 50%;
+  animation: twinkle 4s infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* ============================================================
+   PASSWORD SCREEN
+   ============================================================ */
+#password-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+#password-screen::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow:
+    12px   45px #fff, 38px  120px #fff, 75px   18px #fff,
+   102px  200px #fff,145px   67px #fff,180px  310px #fff,
+   220px   92px #fff,258px  405px #fff,290px   33px #fff,
+   315px  270px #fff,345px  155px #fff,388px   80px #fff,
+   420px  480px #fff,455px   22px #fff,490px  360px #fff,
+   525px  130px #fff,558px  500px #fff,592px   58px #fff,
+   625px  290px #fff,660px  175px #fff,695px  420px #fff,
+   728px   44px #fff,762px  330px #fff,795px  110px #fff;
+  border-radius: 50%;
+  animation: twinkle 3s infinite alternate;
+  pointer-events: none;
+}
+
+.pw-logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 4vw, 22px);
+  text-align: center;
+  background: linear-gradient(90deg, #ff69b4, #00ffff, #39ff14, #bf5fff, #ff69b4);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow-shift 3s linear infinite;
+  line-height: 1.8;
+}
+
+.pw-skull {
+  font-size: 64px;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px #ff69b4);
+}
+
+.pw-box {
+  border: 3px solid var(--pink);
+  box-shadow: 0 0 20px var(--pink), inset 0 0 10px rgba(255,105,180,0.1);
+  background: #0a0010;
+  padding: 30px 28px;
+  border-radius: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.pw-box label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.pw-box input[type="password"] {
+  background: #000;
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 3px;
+  text-align: center;
+  letter-spacing: 4px;
+  outline: none;
+  box-shadow: 0 0 10px var(--cyan);
+  width: 100%;
+}
+
+.pw-box input[type="password"]:focus {
+  box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+}
+
+.pw-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: #fff;
+  border: 2px solid var(--pink);
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px var(--pink);
+  transition: all 0.2s;
+}
+
+.pw-btn:hover {
+  box-shadow: 0 0 30px var(--pink), 0 0 60px var(--pink);
+  transform: scale(1.04);
+}
+
+.pw-error {
+  color: var(--red);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  min-height: 16px;
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}
+
+.pw-hint {
+  font-size: 10px;
+  color: #555;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+/* ============================================================
+   MAIN APP WRAPPER
+   ============================================================ */
+#app {
+  display: none;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee-wrap {
+  background: #0a0010;
+  border-bottom: 2px solid var(--pink);
+  border-top: 2px solid var(--cyan);
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 0 12px var(--pink);
+}
+
+.marquee-inner {
+  display: inline-block;
+  animation: marquee-scroll 28s linear infinite;
+  color: var(--pink);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ============================================================
+   SITE HEADER
+   ============================================================ */
+.site-header {
+  text-align: center;
+  padding: 24px 16px 12px;
+  position: relative;
+}
+
+.main-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 4.5vw, 30px);
+  background: linear-gradient(90deg,
+    #ff69b4, #ff1493, #00ffff, #39ff14, #bf5fff, #ffd700, #ff69b4);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow-shift 4s linear infinite;
+  line-height: 1.6;
+  text-shadow: none;
+  filter: drop-shadow(0 0 8px #ff69b4);
+}
+
+@keyframes rainbow-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--cyan);
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.status-bar span {
+  border: 1px solid var(--cyan);
+  padding: 3px 8px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+/* ============================================================
+   NOW PLAYING WIDGET
+   ============================================================ */
+.now-playing {
+  background: #0a0010;
+  border: 2px solid var(--purple);
+  box-shadow: 0 0 14px var(--purple);
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.np-icon {
+  font-size: 22px;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.np-info {
+  flex: 1;
+  min-width: 150px;
+}
+
+.np-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+.np-track {
+  font-size: 11px;
+  color: #ccc;
+}
+
+.np-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: #222;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 80px;
+}
+
+.np-bar {
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--pink);
+  animation: np-progress 215s linear infinite;
+}
+
+@keyframes np-progress {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* ============================================================
+   TAB NAVIGATION
+   ============================================================ */
+.tab-nav {
+  display: flex;
+  border-bottom: 3px solid var(--pink);
+  box-shadow: 0 3px 12px var(--pink);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: #050008;
+}
+
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 12px 10px;
+  background: #050008;
+  color: #888;
+  border: none;
+  border-right: 1px solid #222;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.tab-btn:hover {
+  color: var(--pink);
+  background: #0f0018;
+  box-shadow: inset 0 -2px 0 var(--pink);
+}
+
+.tab-btn.active {
+  color: var(--pink);
+  background: #1a0025;
+  box-shadow: inset 0 -3px 0 var(--pink), 0 0 12px var(--pink);
+  text-shadow: 0 0 8px var(--pink);
+}
+
+/* ============================================================
+   TAB CONTENT
+   ============================================================ */
+.tab-content { display: none; padding: 16px; }
+.tab-content.active { display: block; }
+
+/* ============================================================
+   CARDS / SECTIONS
+   ============================================================ */
+.card {
+  background: var(--card-bg);
+  border: 3px solid var(--pink);
+  box-shadow: 0 0 16px var(--pink), inset 0 0 8px rgba(255,105,180,0.05);
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.card.cyan-border {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan), inset 0 0 8px rgba(0,255,255,0.05);
+}
+
+.card.green-border {
+  border-color: var(--green);
+  box-shadow: 0 0 16px var(--green), inset 0 0 8px rgba(57,255,20,0.05);
+}
+
+.card.purple-border {
+  border-color: var(--purple);
+  box-shadow: 0 0 16px var(--purple), inset 0 0 8px rgba(191,95,255,0.05);
+}
+
+.card.gold-border {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px var(--gold), inset 0 0 8px rgba(255,215,0,0.05);
+}
+
+.card-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--pink);
+  text-shadow: 0 0 8px var(--pink);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--pink);
+}
+
+.card-title.cyan  { color: var(--cyan);   text-shadow: 0 0 8px var(--cyan);   border-color: var(--cyan); }
+.card-title.green { color: var(--green);  text-shadow: 0 0 8px var(--green);  border-color: var(--green); }
+.card-title.purple{ color: var(--purple); text-shadow: 0 0 8px var(--purple); border-color: var(--purple); }
+.card-title.gold  { color: var(--gold);   text-shadow: 0 0 8px var(--gold);   border-color: var(--gold); }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.divider {
+  border: none;
+  border-top: 2px dashed var(--pink);
+  box-shadow: 0 0 8px var(--pink);
+  margin: 18px 0;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   PROFILE TAB
+   ============================================================ */
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  border: 3px solid var(--pink);
+  box-shadow: 0 0 18px var(--pink);
+  background: linear-gradient(135deg, #2a0040, #000a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  flex-shrink: 0;
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 10px var(--pink); }
+  50%      { box-shadow: 0 0 30px var(--pink), 0 0 60px var(--pink); }
+}
+
+.profile-meta h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: var(--pink);
+  text-shadow: 0 0 10px var(--pink);
+  margin-bottom: 6px;
+}
+
+.profile-meta p {
+  font-size: 12px;
+  color: #ccc;
+  margin-bottom: 3px;
+}
+
+.profile-meta .highlight { color: var(--cyan); font-weight: bold; }
+
+/* Progress bar */
+.progress-wrap {
+  margin: 12px 0;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.progress-bar-outer {
+  background: #111;
+  border: 2px solid var(--pink);
+  box-shadow: 0 0 8px var(--pink);
+  border-radius: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--cyan));
+  box-shadow: 0 0 10px var(--cyan);
+  border-radius: 20px;
+  transition: width 1s ease;
+  min-width: 4px;
+}
+
+.phase-label {
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green);
+  margin-top: 8px;
+  animation: sparkle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sparkle-pulse {
+  0%,100% { opacity: 1; text-shadow: 0 0 8px var(--green); }
+  50%      { opacity: 0.7; text-shadow: 0 0 20px var(--green), 0 0 40px var(--green); }
+}
+
+/* Milestone badges */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.badge {
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  transition: all 0.4s;
+}
+
+.badge .badge-icon { font-size: 22px; display: block; margin-bottom: 5px; filter: grayscale(1); }
+.badge .badge-name { font-size: 10px; display: block; font-family: 'Press Start 2P', monospace; }
+.badge .badge-date { font-size: 9px; color: #444; display: block; margin-top: 3px; }
+
+.badge.unlocked {
+  border-color: var(--green);
+  box-shadow: 0 0 14px var(--green), inset 0 0 6px rgba(57,255,20,0.1);
+  color: var(--green);
+}
+
+.badge.unlocked .badge-icon { filter: none; }
+.badge.unlocked .badge-date { color: #39ff14aa; }
+
+/* Top 8 Friends */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .friends-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.friend-box {
+  border: 2px solid var(--purple);
+  box-shadow: 0 0 10px var(--purple);
+  background: #0a0015;
+  border-radius: 3px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--purple);
+}
+
+.friend-box .friend-emoji { font-size: 28px; display: block; margin-bottom: 4px; }
+.friend-box .friend-name { font-size: 9px; font-family: 'Press Start 2P', monospace; word-break: break-word; line-height: 1.5; }
+
+/* ============================================================
+   MEDS TAB
+   ============================================================ */
+.aspirin-warning {
+  display: none;
+  background: #1a0000;
+  border: 3px solid var(--red);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--red);
+  animation: pulse-red 1s ease-in-out infinite;
+}
+
+@keyframes pulse-red {
+  0%,100% { box-shadow: 0 0 10px var(--red); }
+  50%      { box-shadow: 0 0 30px var(--red), 0 0 60px var(--red); }
+}
+
+.med-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #222;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: #05000d;
+  transition: all 0.3s;
+}
+
+.med-item.taken {
+  border-color: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  background: #001a05;
+}
+
+.med-checkbox {
+  width: 22px; height: 22px;
+  border: 2px solid var(--cyan);
+  border-radius: 3px;
+  background: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+.med-checkbox.checked {
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  color: #000;
+}
+
+.med-info { flex: 1; }
+.med-name { font-weight: bold; color: var(--cyan); font-size: 13px; }
+.med-dose { font-size: 11px; color: #999; margin-top: 2px; }
+.med-time { font-size: 10px; color: var(--green); margin-top: 4px; }
+
+.med-slots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.slot-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 5px 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #888;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slot-btn.taken {
+  background: var(--green);
+  border-color: var(--green);
+  color: #000;
+  box-shadow: 0 0 8px var(--green);
+}
+
+.oxy-section {
+  margin-top: 16px;
+}
+
+.oxy-log-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #3a0010, #1a0030);
+  border: 2px solid var(--red);
+  color: var(--red);
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--red);
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.oxy-log-btn:hover {
+  box-shadow: 0 0 20px var(--red);
+}
+
+.oxy-form {
+  display: none;
+  background: #0a0000;
+  border: 2px solid var(--red);
+  border-radius: 3px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.oxy-form.visible { display: block; }
+
+.oxy-form label {
+  display: block;
+  font-size: 11px;
+  color: #ccc;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.oxy-form input[type=range] {
+  width: 100%;
+  accent-color: var(--red);
+}
+
+.oxy-form textarea {
+  width: 100%;
+  background: #000;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 12px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.oxy-submit {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 8px 14px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.oxy-entry {
+  background: #100000;
+  border: 1px solid #440000;
+  border-radius: 3px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  font-size: 11px;
+}
+
+.oxy-entry .oe-time { color: var(--red); font-size: 10px; }
+.oxy-entry .oe-pain { color: #ff8888; }
+
+/* Compliance grid */
+.compliance-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.compliance-day {
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-family: 'Press Start 2P', monospace;
+  border: 1px solid #333;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.compliance-day.green { background: #004400; border-color: var(--green); color: var(--green); box-shadow: 0 0 6px var(--green); }
+.compliance-day.yellow { background: #333300; border-color: var(--gold); color: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.compliance-day.gray { background: #111; border-color: #333; color: #444; }
+
+/* ============================================================
+   PAIN LOG TAB
+   ============================================================ */
+.pain-slider-wrap {
+  margin: 12px 0;
+}
+
+.pain-slider-wrap input[type=range] {
+  width: 100%;
+  height: 8px;
+  accent-color: var(--pink);
+}
+
+.pain-emoji-display {
+  text-align: center;
+  font-size: 48px;
+  margin: 8px 0;
+  transition: all 0.3s;
+}
+
+.pain-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--pink);
+  font-weight: bold;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #444;
+  background: #111;
+  color: #888;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.toggle-btn.selected {
+  border-color: var(--cyan);
+  background: #001a1a;
+  color: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.mood-picker {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.mood-btn {
+  font-size: 28px;
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mood-btn.selected {
+  border-color: var(--pink);
+  box-shadow: 0 0 10px var(--pink);
+  background: #1a0010;
+}
+
+.pain-notes {
+  width: 100%;
+  background: #050008;
+  border: 2px solid #333;
+  color: #fff;
+  border-radius: 3px;
+  padding: 10px;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 13px;
+  resize: vertical;
+  min-height: 80px;
+  margin: 8px 0;
+}
+
+.pain-notes:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 10px var(--pink);
+  outline: none;
+}
+
+.submit-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: #fff;
+  border: 2px solid var(--pink);
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--pink);
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.submit-btn:hover { box-shadow: 0 0 24px var(--pink); }
+
+.already-logged {
+  text-align: center;
+  padding: 14px;
+  border: 2px solid var(--green);
+  border-radius: 3px;
+  background: #001a05;
+  box-shadow: 0 0 10px var(--green);
+  margin-bottom: 12px;
+}
+
+.already-logged p { color: var(--green); font-size: 12px; margin-bottom: 8px; }
+
+.edit-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 8px 14px;
+  background: #001a05;
+  border: 2px solid var(--green);
+  color: var(--green);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Pain chart */
+.pain-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 120px;
+  margin-top: 12px;
+  padding: 0 4px;
+  overflow-x: auto;
+}
+
+.pain-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 28px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.pain-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  min-height: 3px;
+  transition: height 0.5s ease;
+}
+
+.pain-bar.low  { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.pain-bar.mid  { background: var(--gold);  box-shadow: 0 0 6px var(--gold); }
+.pain-bar.high { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+.pain-bar.none { background: #222; }
+
+.pain-bar-date {
+  font-size: 7px;
+  color: #666;
+  margin-top: 4px;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.pain-bar-val {
+  font-size: 7px;
+  color: #aaa;
+  margin-bottom: 2px;
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* ============================================================
+   APPOINTMENTS TAB
+   ============================================================ */
+.appt-card {
+  background: var(--card-bg);
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.appt-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--cyan);
+  text-shadow: 0 0 8px var(--cyan);
+  margin-bottom: 10px;
+}
+
+.appt-countdown {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--pink);
+  text-shadow: 0 0 12px var(--pink);
+  text-align: center;
+  margin: 12px 0;
+  letter-spacing: 2px;
+}
+
+.appt-countdown.done {
+  color: var(--green);
+  text-shadow: 0 0 12px var(--green);
+  font-size: 14px;
+}
+
+.appt-details { font-size: 11px; color: #ccc; line-height: 1.8; }
+.appt-details span { color: var(--gold); }
+
+.call-btn {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #001a3a, #000);
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+  border-radius: 3px;
+  text-decoration: none;
+  box-shadow: 0 0 10px var(--cyan);
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.call-btn:hover { box-shadow: 0 0 20px var(--cyan); }
+
+.emergency-contacts .ec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #333;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ec-name { font-size: 12px; color: #ccc; }
+
+.dvt-warning {
+  background: #1a0000;
+  border: 3px solid var(--red);
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--red);
+  line-height: 1.8;
+  animation: pulse-red 1.5s ease-in-out infinite;
+  margin-top: 18px;
+}
+
+/* ============================================================
+   MILESTONES TAB
+   ============================================================ */
+.milestone-progress {
+  margin-bottom: 20px;
+}
+
+.milestone-pct {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 22px;
+  text-align: center;
+  color: var(--pink);
+  text-shadow: 0 0 16px var(--pink);
+  margin-bottom: 8px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--pink), var(--cyan), var(--green));
+  box-shadow: 0 0 8px var(--pink);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 10px 0 10px 16px;
+  border-bottom: 1px dashed #222;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #444;
+  background: #111;
+  transition: all 0.4s;
+}
+
+.timeline-item.done::before {
+  border-color: var(--green);
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+}
+
+.timeline-item.just-passed::before {
+  animation: star-pulse 1s ease-in-out infinite;
+}
+
+@keyframes star-pulse {
+  0%,100% { box-shadow: 0 0 10px var(--green); transform: scale(1); }
+  50%      { box-shadow: 0 0 25px var(--green), 0 0 50px var(--green); transform: scale(1.3); }
+}
+
+.tl-date {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.timeline-item.done .tl-date { color: var(--green); }
+
+.tl-desc {
+  font-size: 13px;
+  color: #888;
+}
+
+.timeline-item.done .tl-desc {
+  color: #fff;
+}
+
+.tl-check {
+  color: var(--green);
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.neon-text-pink   { color: var(--pink);   text-shadow: 0 0 8px var(--pink); }
+.neon-text-cyan   { color: var(--cyan);   text-shadow: 0 0 8px var(--cyan); }
+.neon-text-green  { color: var(--green);  text-shadow: 0 0 8px var(--green); }
+.neon-text-purple { color: var(--purple); text-shadow: 0 0 8px var(--purple); }
+
+.mt8  { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+
+.form-row { margin-bottom: 12px; }
+.form-row label { display: block; font-size: 12px; color: #bbb; margin-bottom: 5px; }
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid #333;
+  border-top-color: var(--pink);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 10px;
+  color: #444;
+  border-top: 1px dashed #222;
+  margin-top: 20px;
+}
+
+.site-footer span { color: var(--pink); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .main-title { font-size: clamp(11px, 4vw, 18px); }
+  .tab-btn    { font-size: 7px; padding: 10px 7px; }
+  .appt-countdown { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PASSWORD SCREEN
+     ============================================================ -->
+<div id="password-screen">
+  <div class="pw-skull">🤘</div>
+  <div class="pw-logo">MAKE ASHLEY<br>SHRED AGAIN</div>
+  <div class="pw-box">
+    <label for="pw-input">⚡ ENTER PASSWORD ⚡</label>
+    <input type="password" id="pw-input" placeholder="••••••" autocomplete="off">
+    <button class="pw-btn" onclick="checkPassword()">🔓 UNLOCK 🔓</button>
+    <div class="pw-error" id="pw-error"></div>
+    <div class="pw-hint">Hint: it's a kind of approval 👏</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+<div id="app">
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      🤘 MAKE ASHLEY SHRED AGAIN 🤘 &nbsp;&nbsp;|&nbsp;&nbsp; 💪 DAY BY DAY &nbsp;&nbsp;|&nbsp;&nbsp; 🦵 ACL WHO? &nbsp;&nbsp;|&nbsp;&nbsp; ⚡ RECOVERY MODE ACTIVATED &nbsp;&nbsp;|&nbsp;&nbsp; 🏆 FUTURE SHREDDER &nbsp;&nbsp;|&nbsp;&nbsp; 🎸 LINKIN PARK PLAYS ON &nbsp;&nbsp;|&nbsp;&nbsp; 🩹 REST. RECOVER. SHRED. 🩹 &nbsp;&nbsp;|&nbsp;&nbsp; 🌟 YOU GOT THIS BABE 🌟 &nbsp;&nbsp;|&nbsp;&nbsp; 🤘 MAKE ASHLEY SHRED AGAIN 🤘 &nbsp;&nbsp;|&nbsp;&nbsp; 💪 DAY BY DAY &nbsp;&nbsp;|&nbsp;&nbsp; 🦵 ACL WHO? &nbsp;&nbsp;|&nbsp;&nbsp; ⚡ RECOVERY MODE ACTIVATED &nbsp;&nbsp;|&nbsp;&nbsp; 🏆 FUTURE SHREDDER &nbsp;&nbsp;|&nbsp;&nbsp; 🎸 LINKIN PARK PLAYS ON &nbsp;&nbsp;|&nbsp;&nbsp; 🩹 REST. RECOVER. SHRED. 🩹
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="site-header">
+    <div class="main-title">Make Ashley Shred Again 🤘</div>
+    <div class="status-bar">
+      <span>Visitor #: 00001337</span>
+      <span>Mood: 🤕 Recovering (but make it fashion)</span>
+      <span id="header-day-count">Day ? of Recovery</span>
+    </div>
+  </div>
+
+  <!-- NOW PLAYING -->
+  <div class="now-playing">
+    <div class="np-icon">🎵</div>
+    <div class="np-info">
+      <div class="np-title">NOW PLAYING</div>
+      <div class="np-track">Linkin Park — In The End</div>
+    </div>
+    <div class="np-bar-wrap">
+      <div class="np-bar"></div>
+    </div>
+    <div style="font-size:10px;color:#555;white-space:nowrap;">3:36</div>
+  </div>
+
+  <!-- TAB NAV -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="switchTab('profile')"  role="tab">🏠 Profile</button>
+    <button class="tab-btn"        onclick="switchTab('meds')"     role="tab">💊 Meds</button>
+    <button class="tab-btn"        onclick="switchTab('pain')"     role="tab">📊 Pain Log</button>
+    <button class="tab-btn"        onclick="switchTab('appts')"    role="tab">📅 Appts</button>
+    <button class="tab-btn"        onclick="switchTab('milestones')" role="tab">🏆 Milestones</button>
+  </nav>
+
+  <!-- ============================================================
+       TAB 1: PROFILE
+       ============================================================ -->
+  <div id="tab-profile" class="tab-content active">
+
+    <!-- About Ashley -->
+    <div class="card">
+      <div class="card-title">🏠 About Ashley</div>
+      <div class="profile-hero">
+        <div class="profile-avatar">🤘</div>
+        <div class="profile-meta">
+          <h2>Ashley</h2>
+          <p>Surgery: <span class="highlight">March 19, 2026</span></p>
+          <p>Procedure: <span class="highlight">ACL Reconstruction</span></p>
+          <p>Status: <span style="color:var(--green)">⚡ Recovery Mode Activated</span></p>
+          <p>Surgeon: <span class="highlight">Dr. Fornalski</span></p>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="prof-day-label">Day 0</span>
+          <span>Day 365</span>
+        </div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="prof-progress-bar" style="width:0%"></div>
+        </div>
+        <div class="phase-label" id="prof-phase">Loading phase...</div>
+      </div>
+    </div>
+
+    <!-- Milestone Badges -->
+    <div class="card cyan-border">
+      <div class="card-title cyan">🏅 Milestone Badges</div>
+      <div class="badges-grid">
+        <div class="badge" id="badge-shower">
+          <span class="badge-icon">🚿</span>
+          <span class="badge-name">Shower<br>Unlocked</span>
+          <span class="badge-date">Day 5 · Mar 24</span>
+        </div>
+        <div class="badge" id="badge-meds">
+          <span class="badge-icon">💊</span>
+          <span class="badge-name">Meds<br>Winding Down</span>
+          <span class="badge-date">Day 7 · Mar 26</span>
+        </div>
+        <div class="badge" id="badge-brace">
+          <span class="badge-icon">🦿</span>
+          <span class="badge-name">Brace<br>Check</span>
+          <span class="badge-date">Week 4 · Apr 16</span>
+        </div>
+        <div class="badge" id="badge-aspirin">
+          <span class="badge-icon">🚫</span>
+          <span class="badge-name">No More<br>Aspirin</span>
+          <span class="badge-date">Day 30 · Apr 18</span>
+        </div>
+        <div class="badge" id="badge-walking">
+          <span class="badge-icon">🚶</span>
+          <span class="badge-name">Walking<br>Normal</span>
+          <span class="badge-date">Month 3 · Jun 19</span>
+        </div>
+        <div class="badge" id="badge-jogging">
+          <span class="badge-icon">🏃</span>
+          <span class="badge-name">Light<br>Jogging</span>
+          <span class="badge-date">Month 6 · Sep 19</span>
+        </div>
+        <div class="badge" id="badge-shred">
+          <span class="badge-icon">🏆</span>
+          <span class="badge-name">SHRED<br>AGAIN!</span>
+          <span class="badge-date">Month 12 · Mar 27</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top 8 Friends -->
+    <div class="card purple-border">
+      <div class="card-title purple">👯 Top 8 Friends</div>
+      <div class="friends-grid">
+        <div class="friend-box"><span class="friend-emoji">🦵</span><span class="friend-name">Left Knee</span></div>
+        <div class="friend-box"><span class="friend-emoji">🦵</span><span class="friend-name">Right Knee</span></div>
+        <div class="friend-box"><span class="friend-emoji">🩻</span><span class="friend-name">The ACL</span></div>
+        <div class="friend-box"><span class="friend-emoji">🏋️</span><span class="friend-name">PT Kaitlyn</span></div>
+        <div class="friend-box"><span class="friend-emoji">👨‍⚕️</span><span class="friend-name">Dr. Fornalski</span></div>
+        <div class="friend-box"><span class="friend-emoji">💊</span><span class="friend-name">Aspirin</span></div>
+        <div class="friend-box"><span class="friend-emoji">🧊</span><span class="friend-name">Ice Pack</span></div>
+        <div class="friend-box"><span class="friend-emoji">🛋️</span><span class="friend-name">The Couch</span></div>
+      </div>
+    </div>
+
+    <!-- Now Playing (profile tab duplicate) -->
+    <div class="card gold-border">
+      <div class="card-title gold">🎵 Now Playing</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:36px;animation:pulse-glow 2s ease-in-out infinite;">🎸</div>
+        <div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:var(--gold);">Linkin Park</div>
+          <div style="color:#ccc;font-size:12px;margin:4px 0;">In The End</div>
+          <div style="font-size:10px;color:#666;">Album: Hybrid Theory (2000)</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;background:#111;border-radius:10px;height:8px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 8px var(--gold);">
+        <div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--pink));border-radius:10px;animation:np-progress 215s linear infinite;box-shadow:0 0 8px var(--gold);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:#555;margin-top:4px;">
+        <span>0:00</span><span>3:36</span>
+      </div>
+    </div>
+
+  </div><!-- /tab-profile -->
+
+  <!-- ============================================================
+       TAB 2: MEDS
+       ============================================================ -->
+  <div id="tab-meds" class="tab-content">
+
+    <!-- Aspirin warning banner -->
+    <div class="aspirin-warning" id="aspirin-warning">
+      ⚠️ ASPIRIN NOT TAKEN — TAKE NOW!<br>
+      <span style="font-size:8px;">Blood clot prevention is CRITICAL during recovery</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💊 Today's Medications</div>
+      <div id="meds-list">
+        <div style="color:#888;font-size:12px;text-align:center;padding:20px;">
+          <span class="spinner"></span> Loading meds...
+        </div>
+      </div>
+    </div>
+
+    <!-- Oxy Log -->
+    <div class="card" style="border-color:var(--red);box-shadow:0 0 16px var(--red);">
+      <div class="card-title" style="color:var(--red);border-color:var(--red);">🔴 Oxy / PRN Pain Log</div>
+      <p style="font-size:11px;color:#aaa;margin-bottom:12px;">Log oxycodone doses as-needed. Always log with pain level.</p>
+      <button class="oxy-log-btn" onclick="toggleOxyForm()">+ Log Dose</button>
+      <div class="oxy-form" id="oxy-form">
+        <label>Pain Level: <span id="oxy-pain-display" style="color:var(--red);">5</span>/10</label>
+        <input type="range" min="1" max="10" value="5" id="oxy-pain-slider"
+               oninput="document.getElementById('oxy-pain-display').textContent=this.value">
+        <label>Note (optional):</label>
+        <textarea id="oxy-note" placeholder="e.g. Woke up from pain, 2am..."></textarea>
+        <button class="oxy-submit" onclick="submitOxyDose()">✅ Log This Dose</button>
+      </div>
+      <div id="oxy-entries"></div>
+    </div>
+
+    <!-- 7-day compliance -->
+    <div class="card green-border">
+      <div class="card-title green">📅 7-Day Compliance</div>
+      <p style="font-size:11px;color:#aaa;margin-bottom:8px;">
+        <span style="color:var(--green);">■</span> All taken &nbsp;
+        <span style="color:var(--gold);">■</span> Partial &nbsp;
+        <span style="color:#444;">■</span> No data
+      </p>
+      <div class="compliance-grid" id="compliance-grid">
+        <div style="color:#555;font-size:11px;">Loading...</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-meds -->
+
+  <!-- ============================================================
+       TAB 3: PAIN LOG
+       ============================================================ -->
+  <div id="tab-pain" class="tab-content">
+
+    <div class="card">
+      <div class="card-title">📊 Daily Pain Log</div>
+
+      <div id="already-logged-banner" class="already-logged" style="display:none;">
+        <p>Already logged today ✅</p>
+        <button class="edit-btn" onclick="enablePainForm()">✏️ Edit Entry</button>
+      </div>
+
+      <div id="pain-form">
+        <div class="form-row">
+          <span class="label">Pain Level</span>
+          <div class="pain-emoji-display" id="pain-emoji">😬</div>
+          <div class="pain-label" id="pain-level-label">4 — Noticeable</div>
+          <div class="pain-slider-wrap">
+            <input type="range" min="1" max="10" value="4" id="pain-slider"
+                   oninput="updatePainDisplay(this.value)">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="label">Swelling?</span>
+          <div class="toggle-group">
+            <button class="toggle-btn" id="swell-yes" onclick="setSwelling(true)">Yes 😬</button>
+            <button class="toggle-btn selected" id="swell-no"  onclick="setSwelling(false)">No 🙌</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="label">Mood</span>
+          <div class="mood-picker">
+            <button class="mood-btn" onclick="setMood('😊')" data-mood="😊">😊</button>
+            <button class="mood-btn" onclick="setMood('😐')" data-mood="😐">😐</button>
+            <button class="mood-btn" onclick="setMood('😫')" data-mood="😫">😫</button>
+            <button class="mood-btn" onclick="setMood('🤬')" data-mood="🤬">🤬</button>
+            <button class="mood-btn" onclick="setMood('💪')" data-mood="💪">💪</button>
+            <button class="mood-btn" onclick="setMood('😴')" data-mood="😴">😴</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="label">Notes</span>
+          <textarea class="pain-notes" id="pain-notes"
+                    placeholder="How are you feeling today? Any specific pain locations, activities, wins..."></textarea>
+        </div>
+
+        <button class="submit-btn" onclick="submitPainLog()">💾 Save Today's Log</button>
+      </div>
+    </div>
+
+    <!-- 14-day chart -->
+    <div class="card cyan-border">
+      <div class="card-title cyan">📈 14-Day Pain History</div>
+      <div style="font-size:10px;color:#666;margin-bottom:6px;">
+        <span style="color:var(--green);">■</span> Low (1-3) &nbsp;
+        <span style="color:var(--gold);">■</span> Mid (4-6) &nbsp;
+        <span style="color:var(--red);">■</span> High (7-10) &nbsp;
+        <span style="color:#333;">■</span> No data
+      </div>
+      <div class="pain-chart" id="pain-chart">
+        <div style="color:#555;font-size:11px;align-self:center;">Loading chart...</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-pain -->
+
+  <!-- ============================================================
+       TAB 4: APPOINTMENTS
+       ============================================================ -->
+  <div id="tab-appts" class="tab-content">
+
+    <!-- Appointment 1 -->
+    <div class="appt-card">
+      <div class="appt-name">🦵 PT Consult</div>
+      <div class="appt-countdown" id="countdown-pt">Loading...</div>
+      <div class="appt-details">
+        <div><span>Date:</span> Monday, March 23, 2026 @ 3:30 PM PST</div>
+        <div><span>Provider:</span> Kaitlyn Tiffany Alvarez PT</div>
+        <div><span>Address:</span> 800 Freedom Ln, Aliso Viejo CA 92656</div>
+        <div><span>Phone:</span> (833) 574-2273</div>
+      </div>
+      <a href="tel:8335742273" class="call-btn">📞 Call Now</a>
+    </div>
+
+    <!-- Appointment 2 -->
+    <div class="appt-card">
+      <div class="appt-name">🩺 Post-Op Visit</div>
+      <div class="appt-countdown" id="countdown-postop">Loading...</div>
+      <div class="appt-details">
+        <div><span>Date:</span> Wednesday, April 1, 2026 @ 2:00 PM PST</div>
+        <div><span>Provider:</span> Paul K Grover PA (Ortho)</div>
+        <div><span>Address:</span> 6670 Alton Pkwy, Irvine CA 92618</div>
+        <div><span>Phone:</span> (833) 574-2273</div>
+      </div>
+      <a href="tel:8335742273" class="call-btn">📞 Call Now</a>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="card" style="border-color:var(--red);box-shadow:0 0 16px var(--red);">
+      <div class="card-title" style="color:var(--red);border-color:var(--red);">🆘 Emergency Contacts</div>
+      <div class="emergency-contacts">
+        <div class="ec-item">
+          <span class="ec-name">🏥 Advice Nurse</span>
+          <a href="tel:8885766225" class="call-btn">(888) 576-6225</a>
+        </div>
+        <div class="ec-item">
+          <span class="ec-name">📅 Appointment Center</span>
+          <a href="tel:8889882800" class="call-btn">(888) 988-2800</a>
+        </div>
+        <div class="ec-item">
+          <span class="ec-name">🏋️ PT Scheduling</span>
+          <a href="tel:8558810752" class="call-btn">855-881-0752</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- DVT Warning -->
+    <div class="dvt-warning">
+      🚨 DVT WARNING 🚨<br><br>
+      CALF / THIGH PAIN + CRAMPING + SWELLING<br><br>
+      = CALL ER IMMEDIATELY<br><br>
+      <span style="font-size:8px;color:#ff8888;">Do not wait. Deep vein thrombosis is a medical emergency.</span>
+    </div>
+
+  </div><!-- /tab-appts -->
+
+  <!-- ============================================================
+       TAB 5: MILESTONES
+       ============================================================ -->
+  <div id="tab-milestones" class="tab-content">
+
+    <div class="card">
+      <div class="card-title gold">🏆 Recovery Progress</div>
+      <div class="milestone-progress">
+        <div class="milestone-pct" id="ms-pct">0%</div>
+        <div class="progress-bar-outer" style="border-color:var(--gold);box-shadow:0 0 12px var(--gold);">
+          <div class="progress-bar-inner" id="ms-progress-bar"
+               style="width:0%;background:linear-gradient(90deg,var(--gold),var(--pink));box-shadow:0 0 12px var(--gold);"></div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:#666;margin-top:6px;" id="ms-sub-label">X days into 365-day journey</div>
+      </div>
+    </div>
+
+    <div class="card cyan-border">
+      <div class="card-title cyan">📅 Recovery Timeline</div>
+      <div class="timeline" id="timeline">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+  </div><!-- /tab-milestones -->
+
+  <!-- FOOTER -->
+  <div class="site-footer">
+    Built with 💖 by your husband &nbsp;|&nbsp; <span>Make Ashley Shred Again</span> &nbsp;|&nbsp; 🤘
+  </div>
+
+</div><!-- /app -->
+
+<!-- ============================================================
+     FIREBASE
+     ============================================================ -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<script>
+/* ============================================================
+   FIREBASE INIT
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyARK54MtzxGbPd78iHqfwrIDXodfdrTa90",
+  databaseURL: "https://baja-trip-a8117-default-rtdb.firebaseio.com",
+  projectId: "baja-trip-a8117",
+  storageBucket: "baja-trip-a8117.firebasestorage.app",
+  messagingSenderId: "941528247723",
+  appId: "1:941528247723:web:ca2ca7087ab02fb576f6ee"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+/* ============================================================
+   DATE HELPERS (America/Los_Angeles)
+   ============================================================ */
+const SURGERY_DATE_STR = '2026-03-19'; // YYYY-MM-DD
+
+function getLADate(d) {
+  // Returns a Date object representing midnight LA time for the given date string or now
+  const now = d || new Date();
+  const laStr = now.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  // laStr is YYYY-MM-DD
+  return laStr;
+}
+
+function getLANow() {
+  return new Date();
+}
+
+function getLADateObj(dateStr) {
+  // Parse YYYY-MM-DD as LA midnight
+  const [y, m, da] = dateStr.split('-').map(Number);
+  // We use a trick: create a date in LA timezone at midnight
+  // Use Intl to find what UTC offset LA has on that date
+  const utcDate = new Date(`${dateStr}T12:00:00Z`);
+  const laStr = utcDate.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  // laStr might shift by a day, just use the date string directly
+  return new Date(`${dateStr}T00:00:00`);
+}
+
+function getDayOfRecovery() {
+  const todayStr = getLADate();
+  const today = new Date(todayStr + 'T00:00:00');
+  const surgery = new Date(SURGERY_DATE_STR + 'T00:00:00');
+  return Math.floor((today - surgery) / (1000 * 60 * 60 * 24));
+}
+
+function todayString() {
+  return getLADate();
+}
+
+function dateStringForDay(dayOffset) {
+  const surgery = new Date(SURGERY_DATE_STR + 'T00:00:00');
+  const target = new Date(surgery.getTime() + dayOffset * 86400000);
+  return target.toLocaleDateString('en-CA');
+}
+
+function isDatePassed(dateStr) {
+  // dateStr: YYYY-MM-DD
+  const today = new Date(todayString() + 'T00:00:00');
+  const target = new Date(dateStr + 'T00:00:00');
+  return today >= target;
+}
+
+function getLAHour() {
+  const now = new Date();
+  const h = parseInt(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', hour12: false }));
+  return h;
+}
+
+/* ============================================================
+   PASSWORD
+   ============================================================ */
+function checkPassword() {
+  const val = document.getElementById('pw-input').value.trim();
+  if (val.toLowerCase() === 'bravo') {
+    sessionStorage.setItem('masa-auth', '1');
+    document.getElementById('password-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    const errEl = document.getElementById('pw-error');
+    errEl.textContent = '❌ Wrong password. Try again!';
+    errEl.style.animation = 'none';
+    void errEl.offsetWidth;
+    errEl.style.animation = 'shake 0.4s';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Auto-unlock if already authenticated this session
+if (sessionStorage.getItem('masa-auth') === '1') {
+  document.getElementById('password-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  // initApp called after DOM ready
+  window.addEventListener('DOMContentLoaded', initApp);
+}
+
+/* ============================================================
+   TAB SWITCHING
+   ============================================================ */
+let activeTab = 'profile';
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  // Find matching button
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + tabId + "'")) {
+      btn.classList.add('active');
+    }
+  });
+  activeTab = tabId;
+  if (tabId === 'meds')       loadMedsTab();
+  if (tabId === 'pain')       loadPainTab();
+  if (tabId === 'appts')      updateCountdowns();
+  if (tabId === 'milestones') loadMilestonesTab();
+}
+
+/* ============================================================
+   INIT APP
+   ============================================================ */
+function initApp() {
+  const day = getDayOfRecovery();
+  updateProfileTab(day);
+  updateHeaderDay(day);
+  startCountdownTimer();
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/make-ashley-shred-again/sw.js').catch(() => {});
+  }
+}
+
+function updateHeaderDay(day) {
+  document.getElementById('header-day-count').textContent = 'Day ' + day + ' of Recovery';
+}
+
+/* ============================================================
+   PROFILE TAB
+   ============================================================ */
+function updateProfileTab(day) {
+  // Progress bar
+  const pct = Math.min(100, Math.max(0, (day / 365) * 100));
+  document.getElementById('prof-progress-bar').style.width = pct + '%';
+  document.getElementById('prof-day-label').textContent = 'Day ' + day;
+
+  // Phase
+  const phase = getPhase(day);
+  document.getElementById('prof-phase').textContent = phase;
+
+  // Badges
+  const badge_defs = [
+    { id: 'badge-shower',  dateStr: '2026-03-24' },
+    { id: 'badge-meds',    dateStr: '2026-03-26' },
+    { id: 'badge-brace',   dateStr: '2026-04-16' },
+    { id: 'badge-aspirin', dateStr: '2026-04-18' },
+    { id: 'badge-walking', dateStr: '2026-06-19' },
+    { id: 'badge-jogging', dateStr: '2026-09-19' },
+    { id: 'badge-shred',   dateStr: '2027-03-19' },
+  ];
+  badge_defs.forEach(b => {
+    const el = document.getElementById(b.id);
+    if (el && isDatePassed(b.dateStr)) {
+      el.classList.add('unlocked');
+    }
+  });
+}
+
+function getPhase(day) {
+  if (day < 0)   return 'Pre-Surgery 🗓️';
+  if (day <= 6)   return 'Week 1: Survival Mode 🛏️';
+  if (day <= 13)  return 'Week 2: Finding Legs 🦵';
+  if (day <= 27)  return 'Weeks 3-4: Brace Life 🦿';
+  if (day <= 89)  return 'Month 2-3: Getting Weird 💪';
+  if (day <= 182) return 'Months 3-6: Rising Up 🏃';
+  if (day <= 364) return 'Months 6-12: Almost There 🤘';
+  return 'SHREDDING AGAIN! 🤘🏍️';
+}
+
+/* ============================================================
+   MEDS TAB
+   ============================================================ */
+let medsData = {};
+let medsLoaded = false;
+
+function loadMedsTab() {
+  const day = getDayOfRecovery();
+  const today = todayString();
+
+  db.ref('/masa/meds/' + today).once('value').then(snap => {
+    medsData = snap.val() || {};
+    renderMeds(day, today);
+    checkAspirinWarning(day, today);
+    loadOxyEntries(today);
+    loadComplianceGrid(day);
+  }).catch(() => {
+    medsData = {};
+    renderMeds(day, today);
+  });
+}
+
+function getMedSchedule(day) {
+  const meds = [];
+
+  // Days 0-6: Tylenol, Meloxicam
+  if (day >= 0 && day <= 6) {
+    meds.push({
+      key: 'tylenol_am',
+      name: 'Tylenol 500mg',
+      dose: 'AM dose — 2 tablets',
+      slot: 'AM',
+      color: 'cyan'
+    });
+    meds.push({
+      key: 'tylenol_pm',
+      name: 'Tylenol 500mg',
+      dose: 'PM dose — 2 tablets',
+      slot: 'PM',
+      color: 'cyan'
+    });
+    meds.push({
+      key: 'tylenol_eve',
+      name: 'Tylenol 500mg',
+      dose: 'Evening dose — 2 tablets',
+      slot: 'EVE',
+      color: 'cyan'
+    });
+    meds.push({
+      key: 'meloxicam',
+      name: 'Meloxicam 15mg',
+      dose: 'Once daily with food',
+      slot: null,
+      color: 'purple'
+    });
+  }
+
+  // Day 1+ (Mar 20+): Add Aspirin + Omeprazole
+  if (day >= 1 && day <= 30) {
+    meds.push({
+      key: 'aspirin',
+      name: 'Aspirin EC 81mg',
+      dose: '⚠️ CRITICAL — Once daily for blood clot prevention',
+      slot: null,
+      color: 'red',
+      critical: true
+    });
+    meds.push({
+      key: 'omeprazole',
+      name: 'Omeprazole 20mg',
+      dose: 'Once morning — 30 min before breakfast',
+      slot: null,
+      color: 'green'
+    });
+  }
+
+  // Days 7-30: Only Aspirin + Omeprazole (already added above)
+  // Nothing extra needed, the tylenol/meloxicam are only days 0-6
+
+  return meds;
+}
+
+function renderMeds(day, today) {
+  const container = document.getElementById('meds-list');
+  const meds = getMedSchedule(day);
+
+  if (meds.length === 0) {
+    if (day > 30) {
+      container.innerHTML = '<div style="color:var(--green);text-align:center;padding:20px;font-family:\'Press Start 2P\',monospace;font-size:9px;">✅ No standing meds!<br><br><span style="color:#888;font-size:10px;font-family:\'Comic Sans MS\',cursive;">Aspirin course complete. Use Oxy log below if needed.</span></div>';
+    } else if (day < 0) {
+      container.innerHTML = '<div style="color:#888;text-align:center;padding:20px;">Surgery hasn\'t happened yet!</div>';
+    } else {
+      container.innerHTML = '<div style="color:#888;text-align:center;padding:20px;">No meds scheduled today.</div>';
+    }
+    return;
+  }
+
+  container.innerHTML = meds.map(med => {
+    const data = medsData[med.key] || {};
+    const taken = data.taken || false;
+    const timeStr = taken && data.time ? new Date(data.time).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' }) : '';
+    const borderColor = med.color === 'red' ? 'var(--red)' : med.color === 'green' ? 'var(--green)' : med.color === 'purple' ? 'var(--purple)' : 'var(--cyan)';
+    const glowColor = borderColor;
+
+    return `
+      <div class="med-item ${taken ? 'taken' : ''}" id="med-item-${med.key}"
+           style="${taken ? 'border-color:var(--green);box-shadow:0 0 8px var(--green);' : ''}">
+        <div class="med-checkbox ${taken ? 'checked' : ''}" id="medcb-${med.key}"
+             onclick="toggleMed('${med.key}', '${today}')">
+          ${taken ? '✓' : ''}
+        </div>
+        <div class="med-info">
+          <div class="med-name" style="color:${borderColor};text-shadow:0 0 6px ${glowColor};">${med.name}</div>
+          <div class="med-dose">${med.dose}</div>
+          ${med.slot ? `<div class="med-dose" style="color:var(--gold);">Slot: ${med.slot}</div>` : ''}
+          ${taken ? `<div class="med-time">✓ Taken at ${timeStr}</div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleMed(key, today) {
+  const cbEl = document.getElementById('medcb-' + key);
+  const itemEl = document.getElementById('med-item-' + key);
+  const wasTaken = cbEl.classList.contains('checked');
+  const newTaken = !wasTaken;
+  const now = new Date().toISOString();
+
+  cbEl.classList.toggle('checked', newTaken);
+  cbEl.textContent = newTaken ? '✓' : '';
+  if (itemEl) {
+    itemEl.classList.toggle('taken', newTaken);
+    itemEl.style.borderColor = newTaken ? 'var(--green)' : '';
+    itemEl.style.boxShadow = newTaken ? '0 0 8px var(--green)' : '';
+  }
+
+  // Update local state
+  if (!medsData[key]) medsData[key] = {};
+  medsData[key].taken = newTaken;
+  medsData[key].time = newTaken ? now : null;
+
+  // Save to Firebase
+  db.ref('/masa/meds/' + today + '/' + key).set({
+    taken: newTaken,
+    time: newTaken ? now : null
+  });
+
+  // Refresh time display
+  const day = getDayOfRecovery();
+  renderMeds(day, today);
+  checkAspirinWarning(day, today);
+}
+
+function checkAspirinWarning(day, today) {
+  const warnEl = document.getElementById('aspirin-warning');
+  if (!warnEl) return;
+  if (day >= 1 && day <= 30) {
+    const hour = getLAHour();
+    const aspirinTaken = medsData['aspirin'] && medsData['aspirin'].taken;
+    if (hour >= 10 && !aspirinTaken) {
+      warnEl.style.display = 'block';
+    } else {
+      warnEl.style.display = 'none';
+    }
+  } else {
+    warnEl.style.display = 'none';
+  }
+}
+
+function toggleOxyForm() {
+  const f = document.getElementById('oxy-form');
+  f.classList.toggle('visible');
+}
+
+function submitOxyDose() {
+  const pain = document.getElementById('oxy-pain-slider').value;
+  const note = document.getElementById('oxy-note').value.trim();
+  const today = todayString();
+  const now = new Date().toISOString();
+
+  const entry = { pain: parseInt(pain), note: note, time: now };
+  db.ref('/masa/meds/' + today + '/oxy').push(entry).then(() => {
+    document.getElementById('oxy-note').value = '';
+    document.getElementById('oxy-pain-slider').value = 5;
+    document.getElementById('oxy-pain-display').textContent = '5';
+    document.getElementById('oxy-form').classList.remove('visible');
+    loadOxyEntries(today);
+  });
+}
+
+function loadOxyEntries(today) {
+  db.ref('/masa/meds/' + today + '/oxy').once('value').then(snap => {
+    const data = snap.val();
+    const container = document.getElementById('oxy-entries');
+    if (!data) {
+      container.innerHTML = '<div style="color:#555;font-size:11px;">No doses logged today.</div>';
+      return;
+    }
+    const entries = Object.values(data).sort((a,b) => new Date(a.time) - new Date(b.time));
+    container.innerHTML = '<div style="font-size:11px;color:#aaa;margin-bottom:6px;">Today\'s doses:</div>' +
+      entries.map(e => {
+        const t = new Date(e.time).toLocaleTimeString('en-US', {
+          timeZone: 'America/Los_Angeles',
+          hour: 'numeric', minute: '2-digit'
+        });
+        return `<div class="oxy-entry">
+          <span class="oe-time">${t}</span> —
+          <span class="oe-pain">Pain: ${e.pain}/10</span>
+          ${e.note ? `<div style="color:#888;font-size:10px;margin-top:3px;">${e.note}</div>` : ''}
+        </div>`;
+      }).join('');
+  });
+}
+
+function loadComplianceGrid(currentDay) {
+  const grid = document.getElementById('compliance-grid');
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    days.push(currentDay - i);
+  }
+
+  const promises = days.map(d => {
+    if (d < 0) return Promise.resolve({ day: d, data: null });
+    const dateStr = dateStringForDay(d);
+    return db.ref('/masa/meds/' + dateStr).once('value').then(snap => ({
+      day: d,
+      data: snap.val(),
+      dateStr
+    }));
+  });
+
+  Promise.all(promises).then(results => {
+    grid.innerHTML = results.map(r => {
+      if (r.day < 0 || !r.data) {
+        const label = r.day < 0 ? '—' : 'D' + r.day;
+        return `<div class="compliance-day gray">${label}</div>`;
+      }
+      const meds = getMedSchedule(r.day);
+      if (meds.length === 0) {
+        return `<div class="compliance-day gray">D${r.day}</div>`;
+      }
+      const taken = meds.filter(m => r.data[m.key] && r.data[m.key].taken).length;
+      const total = meds.length;
+      let cls = 'gray';
+      if (taken === total) cls = 'green';
+      else if (taken > 0) cls = 'yellow';
+      return `<div class="compliance-day ${cls}" title="${taken}/${total} taken">D${r.day}</div>`;
+    }).join('');
+  });
+}
+
+/* ============================================================
+   PAIN LOG TAB
+   ============================================================ */
+let painFormEnabled = true;
+let painMood = '';
+let painSwelling = false;
+
+function updatePainDisplay(val) {
+  const v = parseInt(val);
+  let emoji = '😊', label = 'Chillin';
+  if (v === 1) { emoji = '😊'; label = '1 — Chillin'; }
+  else if (v <= 3) { emoji = '🙂'; label = v + ' — Mild'; }
+  else if (v <= 5) { emoji = '😬'; label = v + ' — Noticeable'; }
+  else if (v <= 7) { emoji = '😣'; label = v + ' — Rough'; }
+  else if (v <= 9) { emoji = '😰'; label = v + ' — Bad'; }
+  else             { emoji = '💀'; label = '10 — MAX'; }
+  document.getElementById('pain-emoji').textContent = emoji;
+  document.getElementById('pain-level-label').textContent = label;
+}
+
+function setSwelling(val) {
+  painSwelling = val;
+  document.getElementById('swell-yes').classList.toggle('selected', val);
+  document.getElementById('swell-no').classList.toggle('selected', !val);
+}
+
+function setMood(emoji) {
+  painMood = emoji;
+  document.querySelectorAll('.mood-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.mood === emoji);
+  });
+}
+
+function loadPainTab() {
+  const today = todayString();
+  db.ref('/masa/pain/' + today).once('value').then(snap => {
+    const data = snap.val();
+    if (data) {
+      showAlreadyLogged(data);
+    } else {
+      document.getElementById('already-logged-banner').style.display = 'none';
+      document.getElementById('pain-form').style.display = 'block';
+      painFormEnabled = true;
+    }
+  });
+  loadPainChart();
+}
+
+function showAlreadyLogged(data) {
+  document.getElementById('already-logged-banner').style.display = 'block';
+  document.getElementById('pain-form').style.display = 'none';
+  painFormEnabled = false;
+  // Pre-fill form values in case of edit
+  if (data.pain) {
+    document.getElementById('pain-slider').value = data.pain;
+    updatePainDisplay(data.pain);
+  }
+  if (data.swelling !== undefined) setSwelling(data.swelling);
+  if (data.mood) setMood(data.mood);
+  if (data.notes) document.getElementById('pain-notes').value = data.notes;
+}
+
+function enablePainForm() {
+  document.getElementById('already-logged-banner').style.display = 'none';
+  document.getElementById('pain-form').style.display = 'block';
+  painFormEnabled = true;
+}
+
+function submitPainLog() {
+  const pain = parseInt(document.getElementById('pain-slider').value);
+  const notes = document.getElementById('pain-notes').value.trim();
+  const today = todayString();
+  const now = new Date().toISOString();
+
+  const entry = {
+    pain,
+    swelling: painSwelling,
+    mood: painMood || '😊',
+    notes,
+    time: now
+  };
+
+  db.ref('/masa/pain/' + today).set(entry).then(() => {
+    showAlreadyLogged(entry);
+    loadPainChart();
+  });
+}
+
+function loadPainChart() {
+  const chart = document.getElementById('pain-chart');
+  const currentDay = getDayOfRecovery();
+  const days = [];
+  for (let i = 13; i >= 0; i--) {
+    days.push(currentDay - i);
+  }
+
+  const promises = days.map(d => {
+    if (d < 0) return Promise.resolve({ day: d, data: null });
+    const dateStr = dateStringForDay(d);
+    return db.ref('/masa/pain/' + dateStr).once('value').then(snap => ({
+      day: d,
+      data: snap.val(),
+      dateStr
+    }));
+  });
+
+  Promise.all(promises).then(results => {
+    chart.innerHTML = results.map(r => {
+      const dateLabel = r.dateStr ? r.dateStr.slice(5) : '—';
+      if (!r.data || !r.data.pain) {
+        return `<div class="pain-bar-wrap">
+          <div class="pain-bar-val" style="color:#333;">—</div>
+          <div class="pain-bar none" style="height:4px;"></div>
+          <div class="pain-bar-date">${dateLabel}</div>
+        </div>`;
+      }
+      const p = r.data.pain;
+      const heightPx = Math.round((p / 10) * 100);
+      let cls = p <= 3 ? 'low' : p <= 6 ? 'mid' : 'high';
+      return `<div class="pain-bar-wrap">
+        <div class="pain-bar-val">${p}</div>
+        <div class="pain-bar ${cls}" style="height:${heightPx}px;"></div>
+        <div class="pain-bar-date">${dateLabel}</div>
+      </div>`;
+    }).join('');
+  });
+}
+
+/* ============================================================
+   APPOINTMENTS / COUNTDOWNS
+   ============================================================ */
+const APPOINTMENTS = [
+  {
+    id: 'countdown-pt',
+    // March 23, 2026 3:30 PM PST = UTC+8 during standard time → 23:30 UTC
+    utc: new Date('2026-03-23T23:30:00Z')
+  },
+  {
+    id: 'countdown-postop',
+    // April 1 2026 2:00 PM PDT = UTC-7 → 21:00 UTC
+    utc: new Date('2026-04-01T21:00:00Z')
+  }
+];
+
+function updateCountdowns() {
+  const now = new Date();
+  APPOINTMENTS.forEach(appt => {
+    const el = document.getElementById(appt.id);
+    if (!el) return;
+    const diff = appt.utc - now;
+    if (diff <= 0) {
+      el.textContent = '✅ Completed';
+      el.classList.add('done');
+    } else {
+      const totalMins = Math.floor(diff / 60000);
+      const days = Math.floor(totalMins / 1440);
+      const hrs  = Math.floor((totalMins % 1440) / 60);
+      const mins = totalMins % 60;
+      el.textContent = `${String(days).padStart(2,'0')}d : ${String(hrs).padStart(2,'0')}h : ${String(mins).padStart(2,'0')}m`;
+      el.classList.remove('done');
+    }
+  });
+}
+
+function startCountdownTimer() {
+  updateCountdowns();
+  setInterval(updateCountdowns, 60000);
+}
+
+/* ============================================================
+   MILESTONES TAB
+   ============================================================ */
+const TIMELINE_ITEMS = [
+  { dateStr: '2026-03-20', day: 1,   desc: 'Start Aspirin 💊' },
+  { dateStr: '2026-03-23', day: 4,   desc: 'First PT Session 🦵' },
+  { dateStr: '2026-03-24', day: 5,   desc: 'Shower Without Bag 🚿' },
+  { dateStr: '2026-03-25', day: 6,   desc: 'Tylenol & Meloxicam Done 💊' },
+  { dateStr: '2026-03-26', day: 7,   desc: 'Week 1 Done — DVT Window Closes ✅' },
+  { dateStr: '2026-04-01', day: 13,  desc: 'Post-Op Visit 🩺' },
+  { dateStr: '2026-04-02', day: 14,  desc: 'Elevation Requirement Relaxes 🛏️' },
+  { dateStr: '2026-04-16', day: 28,  desc: '4-Week Brace Check 🦿' },
+  { dateStr: '2026-04-18', day: 30,  desc: 'Aspirin Course Complete ✅' },
+  { dateStr: '2026-06-19', day: 91,  desc: '3 Months — Functional Recovery 🚶' },
+  { dateStr: '2026-09-19', day: 183, desc: '6 Months — Light Activity Cleared 🏃' },
+  { dateStr: '2027-03-19', day: 365, desc: 'MAKE ASHLEY SHRED AGAIN 🤘🏍️' },
+];
+
+function loadMilestonesTab() {
+  const day = getDayOfRecovery();
+  const pct = Math.min(100, Math.max(0, Math.round((day / 365) * 100)));
+  const today = todayString();
+
+  document.getElementById('ms-pct').textContent = pct + '%';
+  document.getElementById('ms-progress-bar').style.width = pct + '%';
+  document.getElementById('ms-sub-label').textContent = day + ' days into 365-day journey';
+
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = TIMELINE_ITEMS.map(item => {
+    const passed = isDatePassed(item.dateStr);
+    const isToday = item.dateStr === today;
+    // "Just passed" = passed within last 3 days
+    const itemDate = new Date(item.dateStr + 'T00:00:00');
+    const todayDate = new Date(today + 'T00:00:00');
+    const diffDays = Math.floor((todayDate - itemDate) / 86400000);
+    const justPassed = passed && diffDays >= 0 && diffDays <= 3;
+
+    const dateDisp = new Date(item.dateStr + 'T12:00:00').toLocaleDateString('en-US', {
+      month: 'short', day: 'numeric', year: item.dateStr.startsWith('2027') ? 'numeric' : undefined
+    });
+
+    return `<div class="timeline-item ${passed ? 'done' : ''} ${justPassed ? 'just-passed' : ''}">
+      <div class="tl-date">${dateDisp} · Day ${item.day}</div>
+      <div class="tl-desc">${item.desc}${passed ? ' <span class="tl-check">✓</span>' : ''}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ============================================================
+   INITIAL LOAD
+   ============================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('masa-auth') !== '1') {
+    // Password screen is showing — do nothing yet
+    document.getElementById('pw-input').focus();
+  } else {
+    // Already authed — initApp was registered above
+  }
+});
+</script>
+
+</body>
+</html>

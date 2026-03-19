@@ -1,0 +1,9 @@
+{
+  "name": "Make Ashley Shred Again",
+  "short_name": "MASA",
+  "start_url": "/make-ashley-shred-again/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff69b4",
+  "icons": [{"src": "icon.png", "sizes": "192x192", "type": "image/png"}]
+}
