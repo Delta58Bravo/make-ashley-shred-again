@@ -1900,14 +1900,16 @@ function loadMedsTab() {
   const day = getDayOfRecovery();
   const today = todayString();
 
-  db.ref('/masa/meds/' + today).once('value').then(snap => {
+  // Real-time listener — auto-updates when either user logs from any device
+  if (window._medsListener) window._medsListener();
+  window._medsListener = db.ref('/masa/meds/' + today).on('value', snap => {
     medsData = snap.val() || {};
     renderMeds(day, today);
     checkAspirinWarning(day, today);
     loadOxyEntries(today);
     loadComplianceGrid(day);
     updateLastSynced();
-  }).catch(() => {
+  }, () => {
     medsData = {};
     renderMeds(day, today);
   });
@@ -2235,7 +2237,8 @@ function setMood(emoji) {
 
 function loadPainTab() {
   const today = todayString();
-  db.ref('/masa/pain/' + today).once('value').then(snap => {
+  if (window._painListener) window._painListener();
+  window._painListener = db.ref('/masa/pain/' + today).on('value', snap => {
     const data = snap.val();
     if (data) {
       showAlreadyLogged(data);
