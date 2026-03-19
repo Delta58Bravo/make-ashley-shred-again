@@ -1288,6 +1288,23 @@ body::before {
       <span>Mood: 🤕 Recovering (but make it fashion)</span>
       <span id="header-day-count">Day ? of Recovery</span>
     </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px;">
+      <button id="refresh-btn" onclick="refreshData()" style="
+        background:transparent;
+        border:2px solid #ff69b4;
+        color:#ff69b4;
+        font-family:'Comic Sans MS',cursive;
+        font-size:0.75rem;
+        padding:5px 14px;
+        border-radius:4px;
+        cursor:pointer;
+        box-shadow:0 0 8px #ff69b4;
+        transition:all 0.2s;
+      " onmouseover="this.style.background='#ff69b422'" onmouseout="this.style.background='transparent'">
+        🔄 Refresh
+      </button>
+      <span id="last-synced" style="font-family:'Comic Sans MS',cursive;font-size:0.65rem;color:#888;">Last synced: —</span>
+    </div>
   </div>
 
   <!-- NOW PLAYING -->
@@ -1774,10 +1791,51 @@ function switchTab(tabId) {
 /* ============================================================
    INIT APP
    ============================================================ */
+function updateLastSynced() {
+  const el = document.getElementById('last-synced');
+  if (el) {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-US', {hour: 'numeric', minute:'2-digit', hour12:true});
+    el.textContent = 'Last synced: ' + timeStr;
+    el.style.color = '#00ff88';
+    setTimeout(() => { el.style.color = '#888'; }, 2000);
+  }
+}
+
+function refreshData() {
+  const btn = document.getElementById('refresh-btn');
+  const el = document.getElementById('last-synced');
+  if (btn) {
+    btn.textContent = '⏳ Syncing...';
+    btn.disabled = true;
+  }
+  if (el) el.textContent = 'Syncing...';
+
+  const day = getDayOfRecovery();
+  updateProfileTab(day);
+  updateHeaderDay(day);
+
+  // Re-render active tab
+  const activeTab = document.querySelector('.tab-btn.active');
+  if (activeTab) {
+    const tabName = activeTab.getAttribute('data-tab');
+    if (tabName === 'meds') loadMedsTab();
+    else if (tabName === 'pain') loadPainTab();
+    else if (tabName === 'appointments') loadAppointmentsTab ? loadAppointmentsTab() : null;
+    else if (tabName === 'milestones') loadMilestonesTab ? loadMilestonesTab() : null;
+  }
+
+  setTimeout(() => {
+    if (btn) { btn.textContent = '🔄 Refresh'; btn.disabled = false; }
+    updateLastSynced();
+  }, 800);
+}
+
 function initApp() {
   const day = getDayOfRecovery();
   updateProfileTab(day);
   updateHeaderDay(day);
+  updateLastSynced();
   startCountdownTimer();
   // Register service worker
   if ('serviceWorker' in navigator) {
@@ -1847,6 +1905,7 @@ function loadMedsTab() {
     checkAspirinWarning(day, today);
     loadOxyEntries(today);
     loadComplianceGrid(day);
+    updateLastSynced();
   }).catch(() => {
     medsData = {};
     renderMeds(day, today);
