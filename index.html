@@ -1259,6 +1259,9 @@ body::before {
   <div class="pw-box">
     <label for="pw-input">⚡ ENTER PASSWORD ⚡</label>
     <input type="password" id="pw-input" placeholder="••••••" autocomplete="off">
+    <label style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Comic Sans MS',cursive;font-size:0.75rem;color:#aaa;cursor:pointer;margin:8px 0;">
+      <input type="checkbox" id="remember-me" style="accent-color:#ff69b4;width:14px;height:14px;cursor:pointer;"> Remember me on this device
+    </label>
     <button class="pw-btn" onclick="checkPassword()">🔓 UNLOCK 🔓</button>
     <div class="pw-error" id="pw-error"></div>
     <div class="pw-hint">Hint: it's a kind of approval 👏</div>
@@ -1717,7 +1720,9 @@ function getLAHour() {
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim();
   if (val.toLowerCase() === 'bravo') {
-    sessionStorage.setItem('masa-auth', '1');
+    const remember = document.getElementById('remember-me').checked;
+    if (remember) localStorage.setItem('masa-auth', '1');
+    else sessionStorage.setItem('masa-auth', '1');
     document.getElementById('password-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     initApp();
@@ -1736,8 +1741,8 @@ document.getElementById('pw-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') checkPassword();
 });
 
-// Auto-unlock if already authenticated this session
-if (sessionStorage.getItem('masa-auth') === '1') {
+// Auto-unlock if already authenticated this session or remembered
+if (sessionStorage.getItem('masa-auth') === '1' || localStorage.getItem('masa-auth') === '1') {
   document.getElementById('password-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   // initApp called after DOM ready
@@ -2299,7 +2304,7 @@ function loadMilestonesTab() {
    INITIAL LOAD
    ============================================================ */
 window.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('masa-auth') !== '1') {
+  if (sessionStorage.getItem('masa-auth') !== '1' && localStorage.getItem('masa-auth') !== '1') {
     // Password screen is showing — do nothing yet
     document.getElementById('pw-input').focus();
   } else {
