@@ -1,9 +1,24 @@
 {
   "name": "Make Ashley Shred Again",
   "short_name": "MASA",
+  "description": "ACL recovery tracker. Meds, pain, milestones. MySpace edition.",
   "start_url": "/make-ashley-shred-again/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#ff69b4",
-  "icons": [{"src": "icon.png", "sizes": "192x192", "type": "image/png"}]
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
